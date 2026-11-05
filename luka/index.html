@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <title>¡Luka cumple 1 Año! - Invitación Plim Plim Circo</title>
+  <meta name="description" content="¡Ven a celebrar el Primer Añito de Luka en el mágico Circo de Plim Plim! Av. Circunvalación Túpac Amaru 163 - Hotel Casa Grande - Pasco, 4:00 pm.">
+  <meta property="og:title" content="¡Luka cumple 1 Año! - Invitación Plim Plim Circo">
+  <meta property="og:description" content="¡Acompáñanos a celebrar este momento tan especial! Sábado 14 de Noviembre, 4:00 pm en Hotel Casa Grande - Pasco.">
+  <meta property="og:image" content="https://invitacionesdigitales.space/luka/assets/media/plim-hero.png">
+  <meta property="og:url" content="https://invitacionesdigitales.space/luka">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#062e91">
+
+  <!-- Google Fonts de respaldo en caso de carga progresiva -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,700&family=Fredoka:wght@600;700&family=League+Spartan:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       LIENZO INTERACTIVO DE BRILLANTES DORADOS Y DESTELLOS (PC Y CELULAR)
+       ======================================================================== -->
+  <canvas id="sparkle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Audio opcional (si colocas assets/musica.mp3 se reproducirá, si no, suena la cajita musical de circo integrada) -->
+  <audio id="bg-music-audio" loop preload="auto"></audio>
+
+  <!-- ========================================================================
+       TELÓN DE BIENVENIDA INTERACTIVO
+       ======================================================================== -->
+  <div id="welcome-overlay" class="welcome-overlay" role="dialog" aria-label="Bienvenida a la invitación de Luka">
+    <img src="assets/media/circus-tent-top.png" alt="" class="welcome-tent-top">
+    <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="top: 8%; right: 8%; width: 180px;">
+    <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="bottom: 8%; left: 6%; width: 170px;">
+
+    <div class="welcome-card">
+      <span class="welcome-badge">🎪 ¡GRAN FUNCIÓN DE CUMPLEAÑOS! ✨</span>
+      <img src="assets/media/plim-hero.png" alt="Plim Plim" class="welcome-character">
+      <h1 class="welcome-title">Luka<br><span style="font-size: 0.72em;">Mi Primer Año</span></h1>
+      <p class="welcome-subtitle">¡Tienes una invitación muy especial para celebrar conmigo!</p>
+
+      <button type="button" id="open-invitation-btn" class="welcome-open-btn">
+        <span class="welcome-open-btn-inner">
+          <span>✨ Abrir Invitación</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       BOTÓN FLOTANTE DE MÚSICA
+       ======================================================================== -->
+  <div class="floating-controls">
+    <button type="button" id="music-toggle-btn" class="floating-btn" title="Activar / Pausar Música" aria-label="Activar o pausar música">
+      <!-- Icono Música Encendida -->
+      <svg id="music-icon-on" viewBox="0 0 24 24" style="display: none;">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+      <!-- Icono Música Pausada -->
+      <svg id="music-icon-off" viewBox="0 0 24 24">
+        <path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ========================================================================
+       CONTENEDOR PRINCIPAL DE LA INVITACIÓN (OPTIMIZADO PC Y CELULAR)
+       ======================================================================== -->
+  <main class="invitation-wrapper">
+
+    <!-- PARTE SUPERIOR: CIELO CELESTE CON TEXTURA DE RAYOS DE SOL Y NUBES -->
+    <div class="sky-canvas">
+
+      <!-- ====================================================================
+           1. PORTADA / HERO: CARPA DE CIRCO + PLIM PLIM + "LUKA" + "1 AÑO"
+           ==================================================================== -->
+      <section class="hero-section">
+        <!-- Brillantes animados superiores (idénticos al demo) -->
+        <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="top: 1%; right: -4%; width: 36%; z-index: 16;">
+        <img src="assets/video/sparkles-stars.gif" alt="" class="sparkle-gif-normal" style="top: 18%; left: 3%; width: 18%; opacity: 0.55; z-index: 16;">
+
+        <!-- Nubes 3D decorativas -->
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor" style="top: 2%; right: -6%; width: 22%;">
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor delay-1" style="top: 28%; left: 14%; width: 17%;">
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor delay-2" style="top: 28%; right: 12%; width: 16%;">
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor" style="top: 58%; left: -6%; width: 21%;">
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor delay-1" style="top: 86%; right: -5%; width: 21%;">
+
+        <!-- Globos flotantes de colores (Amarillo, Rojo, Azul, Verde como el demo) -->
+        <!-- Globo Amarillo Izquierda -->
+        <svg class="balloon-float" style="top: 38%; left: -4%; width: 16%;" viewBox="0 0 120 260">
+          <path d="M60 128 C58 175, 42 215, 55 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+          <ellipse cx="60" cy="64" rx="48" ry="58" fill="#ffce00" stroke="#5b3a04" stroke-width="3"/>
+          <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+          <polygon points="54,121 66,121 63,129 57,129" fill="#ffce00" stroke="#5b3a04" stroke-width="2.5"/>
+        </svg>
+
+        <!-- Globo Rojo Izquierda Inferior -->
+        <svg class="balloon-float delay-1" style="top: 49%; left: -3%; width: 18%;" viewBox="0 0 120 260">
+          <path d="M60 128 C64 175, 75 215, 62 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+          <ellipse cx="60" cy="64" rx="48" ry="58" fill="#fc4242" stroke="#5b3a04" stroke-width="3"/>
+          <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+          <polygon points="54,121 66,121 63,129 57,129" fill="#fc4242" stroke="#5b3a04" stroke-width="2.5"/>
+        </svg>
+
+        <!-- Globo Amarillo + Rojo Derecha -->
+        <img src="assets/media/balloon-yellow.svg" alt="" class="balloon-float delay-2" style="top: 39%; right: -2%; width: 15%;">
+        <svg class="balloon-float delay-1" style="top: 50%; right: -4%; width: 18%;" viewBox="0 0 120 260">
+          <path d="M60 128 C55 175, 48 215, 60 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+          <ellipse cx="60" cy="64" rx="48" ry="58" fill="#fc4242" stroke="#5b3a04" stroke-width="3"/>
+          <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+          <polygon points="54,121 66,121 63,129 57,129" fill="#fc4242" stroke="#5b3a04" stroke-width="2.5"/>
+        </svg>
+
+        <!-- Toldo Superior de la Carpa de Circo -->
+        <div class="circus-canopy-wrap">
+          <img src="assets/media/circus-tent-top.png" alt="Carpa de Circo Plim Plim" class="circus-canopy-img">
+        </div>
+
+        <!-- Ilustración Principal de Plim Plim (sin marco ni imagen de fondo rota) -->
+        <div class="hero-character-wrap">
+          <img src="assets/media/plim-hero.png" alt="Plim Plim" class="hero-character-main">
+        </div>
+
+        <!-- Nombre del Cumpleañero "Luka" en Arco Curvo 3D (Todo en color rojo #e6111e) -->
+        <div class="hero-title-group">
+          <svg class="curved-name-svg" viewBox="0 0 600 185" role="heading" aria-level="1" aria-label="Luka">
+            <defs>
+              <path id="luka-curve-shadow" d="M 45,148 Q 300,52 555,148" />
+              <path id="luka-curve-main" d="M 40,140 Q 300,44 560,140" />
+            </defs>
+            <!-- Capa Sombra 3D Marrón Oscuro (#402b18 / #503a26) -->
+            <text font-family="'Hey Comic', 'Fredoka', cursive" font-size="118" text-anchor="middle" fill="#402b18" stroke="#503a26" stroke-width="10" stroke-linejoin="round" letter-spacing="3">
+              <textPath href="#luka-curve-shadow" startOffset="50%">Luka</textPath>
+            </text>
+            <!-- Capa Contorno Crema Dorado (#f7ebb9) -->
+            <text font-family="'Hey Comic', 'Fredoka', cursive" font-size="118" text-anchor="middle" fill="#e6111e" stroke="#f7ebb9" stroke-width="11" stroke-linejoin="round" letter-spacing="3">
+              <textPath href="#luka-curve-main" startOffset="50%">Luka</textPath>
+            </text>
+            <!-- Capa Relleno Rojo Circo (#e6111e) -->
+            <text font-family="'Hey Comic', 'Fredoka', cursive" font-size="118" text-anchor="middle" fill="#e6111e" letter-spacing="3">
+              <textPath href="#luka-curve-main" startOffset="50%">Luka</textPath>
+            </text>
+          </svg>
+
+          <!-- Subtítulo 3D: "Mi Primer año" -->
+          <div class="subtitle-3d-wrap">
+            <div class="text-3d-layer">Mi Primer año</div>
+            <div class="age-badge-pill">🎪 ¡Cumplo 1 Añito! ✨</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           2. FRASE DE INVITACIÓN + SECCIÓN MIS PAPÁS Y FECHA
+           ==================================================================== -->
+      <section class="quote-section reveal-on-scroll">
+        <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="top: -10%; right: -6%; width: 34%;">
+        <div class="quote-box">
+          <p class="quote-text">
+            Hoy celebramos la alegría de mi primer añito de vida, rodeado de magia, sonrisas y el amor de quienes más quiero.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN MIS PAPÁS Y PREÁMBULO DE FECHA -->
+      <section class="family-section reveal-on-scroll">
+        <!-- Globo Azul Izquierda -->
+        <svg class="balloon-float delay-2" style="top: 4%; left: -5%; width: 17%;" viewBox="0 0 120 260">
+          <path d="M60 128 C58 175, 42 215, 55 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+          <ellipse cx="60" cy="64" rx="48" ry="58" fill="#29b7fc" stroke="#5b3a04" stroke-width="3"/>
+          <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+          <polygon points="54,121 66,121 63,129 57,129" fill="#29b7fc" stroke="#5b3a04" stroke-width="2.5"/>
+        </svg>
+
+        <!-- Globo Verde Izquierda Inferior -->
+        <svg class="balloon-float" style="top: 52%; left: -5%; width: 17%;" viewBox="0 0 120 260">
+          <path d="M60 128 C64 175, 75 215, 62 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+          <ellipse cx="60" cy="64" rx="48" ry="58" fill="#7fc61e" stroke="#5b3a04" stroke-width="3"/>
+          <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+          <polygon points="54,121 66,121 63,129 57,129" fill="#7fc61e" stroke="#5b3a04" stroke-width="2.5"/>
+        </svg>
+
+        <!-- Bloque: Mis papás -->
+        <div class="family-block">
+          <svg class="circus-ribbon-svg" viewBox="0 0 500 150" aria-label="Mis papás">
+            <defs>
+              <path id="ribbon-curve-1" d="M 60,107 Q 250,63 440,107" />
+            </defs>
+            <!-- Colas de la cinta -->
+            <polygon points="15,105 85,65 85,125 15,135 38,115" fill="#9e0b14" stroke="#402b18" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="485,105 415,65 415,125 485,135 462,115" fill="#9e0b14" stroke="#402b18" stroke-width="4" stroke-linejoin="round"/>
+            <!-- Cuerpo curvo de la cinta roja y dorada -->
+            <path d="M 55,55 Q 250,12 445,55 L 430,118 Q 250,75 70,118 Z" fill="#e6111e" stroke="#ffd60a" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M 62,62 Q 250,20 438,62 L 425,110 Q 250,68 75,110 Z" fill="none" stroke="#402b18" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <!-- Texto Curvo "Mis papás" centrado verticalmente en la etiqueta -->
+            <text font-family="'Hey Comic', 'Fredoka', cursive" font-size="50" text-anchor="middle" fill="#f7ebb9" stroke="#402b18" stroke-width="6" paint-order="stroke fill">
+              <textPath href="#ribbon-curve-1" startOffset="50%">Mis papás</textPath>
+            </text>
+          </svg>
+          <div id="display-parents" class="family-names">
+            Valeria y Yeyson
+          </div>
+        </div>
+
+        <!-- Divisor Animado de Plim Plim con Destellos de Circo Laterales -->
+        <div class="plim-center-divider">
+          <img src="assets/video/circus-sparkles.gif" alt="" class="circus-side-sparkles-left">
+          <img src="assets/video/sparkles-stars.gif" alt="" class="sparkle-gif-normal" style="left: 12%; top: 0; width: 22%; opacity: 0.45;">
+          <img src="assets/video/plim-anim-2.gif" alt="Plim Plim celebrando" class="plim-center-gif">
+          <img src="assets/video/sparkles-stars.gif" alt="" class="sparkle-gif-normal" style="right: 12%; top: 0; width: 22%; opacity: 0.45;">
+          <img src="assets/video/circus-sparkles.gif" alt="" class="circus-side-sparkles-right">
+        </div>
+
+        <!-- Bloque: Fecha ("Te esperamos el:") -->
+        <div class="family-block" style="margin-bottom: -14px;">
+          <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="top: -20%; left: -10%; width: 35%;">
+          <img src="assets/media/balloon-cluster.png" alt="" class="balloon-float" style="top: 10%; right: -6%; width: 20%;">
+
+          <svg class="circus-ribbon-svg" viewBox="0 0 500 150" aria-label="Fecha">
+            <defs>
+              <path id="ribbon-curve-2" d="M 55,107 Q 250,63 445,107" />
+            </defs>
+            <polygon points="15,105 85,65 85,125 15,135 38,115" fill="#9e0b14" stroke="#402b18" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="485,105 415,65 415,125 485,135 462,115" fill="#9e0b14" stroke="#402b18" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M 55,55 Q 250,12 445,55 L 430,118 Q 250,75 70,118 Z" fill="#e6111e" stroke="#ffd60a" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M 62,62 Q 250,20 438,62 L 425,110 Q 250,68 75,110 Z" fill="none" stroke="#402b18" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <!-- Texto Curvo "Fecha" centrado verticalmente en la etiqueta -->
+            <text font-family="'Hey Comic', 'Fredoka', cursive" font-size="52" text-anchor="middle" fill="#f7ebb9" stroke="#402b18" stroke-width="6" paint-order="stroke fill">
+              <textPath href="#ribbon-curve-2" startOffset="50%">Fecha</textPath>
+            </text>
+          </svg>
+          <div id="display-godparents" class="family-names">
+            Te esperamos el:
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           3. FECHA DEL EVENTO (MARCO DE CIRCO ORIGINAL) + CUENTA REGRESIVA
+           ==================================================================== -->
+      <section class="date-section reveal-on-scroll">
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor" style="top: -8%; left: -6%; width: 20%;">
+
+        <!-- Marco de Fecha Original del Demo -->
+        <div class="date-frame-container">
+          <img src="assets/media/date-frame.png" alt="Fecha del cumpleaños" class="date-frame-bg">
+          <div class="date-frame-content">
+            <div id="display-day-name" class="date-day-name">Sábado</div>
+            <div class="date-number-badge-wrap">
+              <img src="assets/media/date-badge.png" alt="" class="date-number-badge-img">
+              <span id="display-day-num" class="date-number-text">14</span>
+            </div>
+            <div id="display-month-name" class="date-month-name">Noviembre</div>
+          </div>
+        </div>
+
+        <!-- Cuenta Regresiva Interactiva -->
+        <div class="countdown-box">
+          <div class="countdown-label">¡Falta muy poquito para celebrar!</div>
+          <div class="countdown-grid" role="timer" aria-label="Cuenta regresiva">
+            <div class="countdown-item">
+              <div class="countdown-item-inner">
+                <span id="cd-days" class="countdown-num">00</span>
+                <span class="countdown-unit">Días</span>
+              </div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-item-inner">
+                <span id="cd-hours" class="countdown-num">00</span>
+                <span class="countdown-unit">Horas</span>
+              </div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-item-inner">
+                <span id="cd-mins" class="countdown-num">00</span>
+                <span class="countdown-unit">Min</span>
+              </div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-item-inner">
+                <span id="cd-secs" class="countdown-num">00</span>
+                <span class="countdown-unit">Seg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personaje Plim Plim animado izquierda y Rueda de la Fortuna derecha (como el demo) -->
+        <div class="date-characters-row">
+          <img src="assets/video/plim-anim-1.gif" alt="Plim Plim" class="date-plim-left">
+          <img src="assets/media/circus-wheel.png" alt="Rueda de la fortuna de circo" class="date-wheel-right">
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           4. ARCOS DE CIRCO ROJO Y AZUL (LUGAR, HORA, MAPA, RSVP Y REGALOS)
+           ==================================================================== -->
+      <div class="arches-container">
+
+        <!-- ARCO ROJO DE CIRCO: LUGAR Y HORA DE LA CELEBRACIÓN -->
+        <section class="red-arch-section">
+          <!-- Globos decorativos laterales -->
+          <svg class="balloon-float" style="top: 40px; left: 3%; width: 15%;" viewBox="0 0 120 260">
+            <path d="M60 128 C58 175, 42 215, 55 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+            <ellipse cx="60" cy="64" rx="48" ry="58" fill="#ffce00" stroke="#5b3a04" stroke-width="3"/>
+            <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+            <polygon points="54,121 66,121 63,129 57,129" fill="#ffce00" stroke="#5b3a04" stroke-width="2.5"/>
+          </svg>
+          <img src="assets/media/circus-decor.svg" alt="" style="position: absolute; top: 90px; right: 2%; width: 22%; pointer-events: none; z-index: 4;">
+          <img src="assets/media/cloud.png" alt="" class="cloud-decor" style="top: 110px; left: 2%; width: 18%;">
+
+          <div class="reveal-on-scroll">
+            <!-- Ícono de Carpa / Fiesta en color crema #fff1b6 -->
+            <div class="event-icon-wrap">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M32 4 L36 12 L45 10 L42 18 L50 22 L43 27 L32 10 Z" opacity="0.35"/>
+                <path d="M32 6 L8 28 H56 L32 6 Z M32 6 V2 M26 4 H38 M12 28 V56 H24 V40 C24 35.5 27.5 32 32 32 C36.5 32 40 35.5 40 40 V56 H52 V28 H12 Z M6 56 H58 V60 H6 V56 Z"/>
+              </svg>
+            </div>
+
+            <!-- Fila Hora idéntica al demo: "Recepción | 4:00 pm" -->
+            <div class="event-time-row">
+              <span class="event-time-label">Recepción</span>
+              <span class="event-time-divider" aria-hidden="true"></span>
+              <span class="event-time-value">4:00 pm</span>
+            </div>
+
+            <!-- Lugar y Dirección solicitada -->
+            <div class="event-venue-name">Hotel Casa Grande - Pasco</div>
+            <p class="event-address">
+              Av. Circunvalación Túpac Amaru 163 - Hotel Casa Grande - Pasco
+            </p>
+
+            <!-- Botón Mapa de Ubicación (Doble borde idéntico al demo) -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; position: relative; z-index: 10;">
+              <a href="https://www.google.com/maps/search/?api=1&query=Av.+Circunvalacion+Tupac+Amaru+163+Hotel+Casa+Grande+Pasco"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="circus-btn">
+                <span class="circus-btn-inner">
+                  <img src="assets/media/pin-icon.svg" alt="" style="width: 18px; height: 24px; filter: brightness(0) saturate(100%) invert(21%) sepia(67%) saturate(1026%) hue-rotate(15deg) brightness(92%) contrast(97%);">
+                  <span>Mapa de ubicación</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ARCO AZUL DE CIRCO: CONFIRMACIÓN DE ASISTENCIA Y SUGERENCIA DE REGALOS -->
+        <section class="blue-arch-section">
+          <img src="assets/video/sparkles-stars.gif" alt="" class="sparkle-gif-normal" style="top: 6%; right: 6%; width: 20%; opacity: 0.42;">
+          <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="bottom: 8%; left: 2%; width: 32%;">
+
+          <!-- Globos flotantes en los bordes del arco azul -->
+          <svg class="balloon-float delay-1" style="top: 6%; left: 3%; width: 15%;" viewBox="0 0 120 260">
+            <path d="M60 128 C58 175, 42 215, 55 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+            <ellipse cx="60" cy="64" rx="48" ry="58" fill="#29b7fc" stroke="#5b3a04" stroke-width="3"/>
+            <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+            <polygon points="54,121 66,121 63,129 57,129" fill="#29b7fc" stroke="#5b3a04" stroke-width="2.5"/>
+          </svg>
+          <svg class="balloon-float delay-2" style="top: 38%; right: 3%; width: 15%;" viewBox="0 0 120 260">
+            <path d="M60 128 C64 175, 75 215, 62 255" stroke="#5b3a04" stroke-width="2.5" fill="none"/>
+            <ellipse cx="60" cy="64" rx="48" ry="58" fill="#ffce00" stroke="#5b3a04" stroke-width="3"/>
+            <ellipse cx="42" cy="44" rx="12" ry="22" transform="rotate(-20 42 44)" fill="rgba(255,255,255,0.55)"/>
+            <polygon points="54,121 66,121 63,129 57,129" fill="#ffce00" stroke="#5b3a04" stroke-width="2.5"/>
+          </svg>
+
+          <!-- Personaje Plim Plim animado 3 (idéntico al demo) -->
+          <div style="position: relative; z-index: 6; margin: -20px auto 10px; width: clamp(160px, 42vw, 220px);">
+            <img src="assets/video/plim-anim-3.gif" alt="Plim Plim" style="width: 100%; height: auto;">
+          </div>
+
+          <!-- BLOQUE 1: CONFIRMACIÓN DE ASISTENCIA -->
+          <div class="blue-arch-block reveal-on-scroll">
+            <div class="event-icon-wrap">
+              <!-- Ícono Calendario / Confirmación en crema #fff1b6 -->
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M18 6V12H12C8.7 12 6 14.7 6 18V52C6 55.3 8.7 58 12 58H52C55.3 58 58 55.3 58 52V18C58 14.7 55.3 12 52 12H46V6H40V12H24V6H18ZM12 24H52V52H12V24ZM43.5 31.5L28.5 46.5L20.5 38.5L24.7 34.3L28.5 38.1L39.3 27.3L43.5 31.5Z"/>
+              </svg>
+            </div>
+
+            <h2 class="event-section-title">Confirmación de<br>asistencia</h2>
+            <p class="section-italic-desc">
+              Nos encantará saber que nos acompañarás, permítenos preparar los detalles confirmando tu asistencia.
+            </p>
+
+            <a href="https://wa.me/51929748371?text=Hola%20Valeria%2C%20confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Luka%20%3A%29%20"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="circus-btn red-outer">
+              <span class="circus-btn-inner">
+                <span>Sí asistiré</span>
+              </span>
+            </a>
+          </div>
+
+          <!-- Plim Plim animado 4 lateral derecho -->
+          <div style="position: relative; height: 110px; margin: -10px 0; pointer-events: none; z-index: 6;">
+            <img src="assets/video/plim-anim-4.gif" alt="Plim Plim" style="position: absolute; right: 6%; top: -15px; width: clamp(130px, 34vw, 175px);">
+            <img src="assets/media/cloud.png" alt="" class="cloud-decor" style="left: 2%; top: 10px; width: 18%;">
+          </div>
+
+          <!-- BLOQUE 2: SUGERENCIA DE REGALOS -->
+          <div class="blue-arch-block reveal-on-scroll">
+            <div class="event-icon-wrap">
+              <!-- Ícono Caja de Regalo en crema #fff1b6 -->
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M52 20H44.8C46.8 18.2 48 15.5 48 12.5C48 7.3 43.7 3 38.5 3C34.6 3 33 5.2 32 7.5C31 5.2 29.4 3 25.5 3C20.3 3 16 7.3 16 12.5C16 15.5 17.2 18.2 19.2 20H12C8.7 20 6 22.7 6 26V32C6 33.7 7.3 35 9 35H10V53C10 56.3 12.7 59 16 59H48C51.3 59 54 56.3 54 53V35H55C56.7 35 58 33.7 58 32V26C58 22.7 55.3 20 52 20ZM38.5 8C41 8 43 10 43 12.5C43 15 41 17 38.5 17H34V12.5C34 10 36 8 38.5 8ZM25.5 8C28 8 30 10 30 12.5V17H25.5C23 17 21 15 21 12.5C21 10 23 8 25.5 8ZM29 54H15V35H29V54ZM29 30H11V25H29V30ZM49 54H35V35H49V54ZM53 30H35V25H53V30Z"/>
+              </svg>
+            </div>
+
+            <h2 class="event-section-title">Sugerencia de<br>regalos</h2>
+            <p class="section-italic-desc">
+              El mejor obsequio es que nos acompañes, pero si deseas sorprendernos, aquí te dejamos algunas sugerencias.
+            </p>
+
+            <button type="button" class="circus-btn red-outer" data-open-modal="gifts-modal">
+              <span class="circus-btn-inner">
+                <span>🎁 Ver sugerencias</span>
+              </span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         5. CIERRE / FOOTER ("GRACIAS - POR SER PARTE DE ESTE MOMENTO TAN ESPECIAL")
+         ====================================================================== -->
+    <footer class="footer-section">
+      <!-- Brillantes dorados de cierre -->
+      <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="top: -5%; left: -8%; width: 38%;">
+      <img src="assets/video/sparkles-big.gif" alt="" class="sparkle-gif-normal" style="top: 2%; right: -8%; width: 38%;">
+      <img src="assets/video/sparkles-stars.gif" alt="" class="sparkle-gif-normal" style="bottom: 18%; left: 42%; width: 22%; opacity: 0.4;">
+
+      <div class="reveal-on-scroll">
+        <h2 class="gracias-3d-title">Gracias</h2>
+        <p class="gracias-subtitle">
+          Por ser parte de este momento tan especial.
+        </p>
+      </div>
+
+      <!-- Escenario Inferior: Rueda de la fortuna a la izquierda y Plim Plim animado a la derecha (idéntico al demo) -->
+      <div class="footer-characters-stage">
+        <img src="assets/media/cloud.png" alt="" class="cloud-decor" style="top: 15%; left: 34%; width: 18%;">
+        <img src="assets/media/circus-wheel.png" alt="Circo Plim Plim" class="footer-wheel-left">
+        <img src="assets/video/plim-anim-5.gif" alt="Plim Plim diciendo adiós" class="footer-plim-right">
+      </div>
+
+      <!-- Franja inferior de carpa de circo roja y crema -->
+      <div class="circus-bottom-stripes" aria-hidden="true"></div>
+    </footer>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL: SUGERENCIA DE REGALOS / LLUVIA DE SOBRES
+       ======================================================================== -->
+  <div id="gifts-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="gifts-modal-title">
+    <div class="modal-card">
+      <button type="button" class="modal-close" data-close-modal="gifts-modal" aria-label="Cerrar">&times;</button>
+      <h3 id="gifts-modal-title" class="modal-title">🎁 Sugerencia de Regalos</h3>
+      <p class="modal-subtitle">Tu presencia en mi fiesta es el mejor regalo</p>
+
+      <div class="gift-option-card">
+        <div class="gift-option-icon">👕</div>
+        <div class="gift-option-text">
+          <h4>Ropita y Calzado</h4>
+          <p>Talla sugerida para Luka: <strong>18 a 24 meses (Talla 2)</strong>.</p>
+        </div>
+      </div>
+
+      <div class="gift-option-card">
+        <div class="gift-option-icon">🧸</div>
+        <div class="gift-option-text">
+          <h4>Juguetes Didácticos</h4>
+          <p>Juguetes musicales, bloques de construcción, cuentos o peluches de Plim Plim (+1 año).</p>
+        </div>
+      </div>
+
+      <div class="gift-option-card">
+        <div class="gift-option-icon">✉️</div>
+        <div class="gift-option-text">
+          <h4>Lluvia de Sobres</h4>
+          <p>En la recepción tendremos un buzón especial por si deseas hacerme un presente en sobre.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <button type="button" class="circus-btn red-outer" data-close-modal="gifts-modal">
+          <span class="circus-btn-inner">
+            <span>¡Entendido! ✨</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
